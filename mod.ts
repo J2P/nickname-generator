@@ -30,7 +30,7 @@ async function handler(req) {
     }
   }
 
-  return new Response(nicknames.join(','));
+  return new Response(nicknames.join('\n'))
 }
 
 console.log("Listening on http://localhost:8000");
