@@ -1,3 +1,4 @@
+import { json } from "https://deno.land/x/sift@0.4.0/mod.ts";
 import { listenAndServe } from "https://deno.land/std@0.111.0/http/server.ts";
 
 import adjective from './adjective.ts'
@@ -30,7 +31,19 @@ async function handler(req) {
     }
   }
 
-  return new Response(nicknames.join('\n'))
+  // return new Response(nicknames.join('\n'))
+
+  return json({ response_type: 'in_channel',
+    blocks: [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: nicknames.join('\n'),
+        },
+      },
+    ],
+  });
 }
 
 console.log("Listening on http://localhost:8000");
