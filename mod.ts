@@ -4,8 +4,9 @@ import adjective from './adjective.ts'
 import noun from './noun.ts'
 import { getRandomIndex, getRandomAdjective, getRandomNoun } from './utils.ts'
 
-function handler(req) {
-  const count = Deno.args[0];
+async function handler(req) {
+  const formData = await req.formData()
+  const count = formData.get("text")!.toString().trim()
   const MIN_COUNT = Math.min(adjective.length, noun.length)
   const selectedAdjective = []
   const selectedNoun = []
